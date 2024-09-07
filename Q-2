@@ -1,0 +1,34 @@
+#include <iostream>
+#include <string>
+#include <cctype>  // For isalnum() and tolower()
+
+bool isPalindrome(const std::string &str) {
+    int left = 0;
+    int right = str.length() - 1;
+
+    while (left < right) {
+        // Ignore non-alphanumeric characters from the left side
+        while (left < right && !isalnum(str[left])) {
+            left++;
+        }
+        // Ignore non-alphanumeric characters from the right side
+        while (left < right && !isalnum(str[right])) {
+            right--;
+        }
+        // Compare characters (case-insensitive)
+        if (tolower(str[left]) != tolower(str[right])) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
+}
+
+int main() {
+    std::string test1 = "A man, a plan, a canal, Panama";
+    std::string test2 = "Racecar";
+    std::string test3 = "Hello, World!";
+
+    std::cout << "\"" << test1 << "\" is a palindrome: " << (isPalindrome(test1) ? "true" : "false") << std::endl;
+    std::cout << "\"" << test2 << "\" is a palindrome: " << (isPalindrome(test2) ? 
